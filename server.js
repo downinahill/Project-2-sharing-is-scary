@@ -41,7 +41,7 @@ app.use(methodOverride('_method'))
 
 //controllers
 
-const productsController = require('./controllers/artController')
+const artController = require('./controllers/artController')
 app.use('/art', artController)
 
 
