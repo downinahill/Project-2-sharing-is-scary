@@ -1,0 +1,32 @@
+
+
+body {
+        background: radial-gradient(ellipse at right bottom, #EEB1BF 5%, #d42dab 25%, #4d1d63 50%, #030243 100%);
+        margin: 10px;
+    outline: white solid 5px;
+    
+    }
+#categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+h1 {
+    
+    color: white;
+}
+
+#pictures {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#jerry {
+    width: 20vw;
+    height: 60vh;
+}
