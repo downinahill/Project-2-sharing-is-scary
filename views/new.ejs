@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>STORE APP WITH MONGODB</title>
-    <link rel="stylesheet" href="public/style.css">
-  </head>
-  <body>
+<%- include('./partials/header.ejs') %>
     <h1>New Product Page</h1>
 
     <form action="/art" method="POST">
@@ -15,5 +8,4 @@
 
       <input type="submit" value="Create Product" />
     </form>
-  </body>
-</html>
+    <%- include('./partials/footer.ejs') %>

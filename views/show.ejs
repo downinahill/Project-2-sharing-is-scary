@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Show</title>
-	<link rel="stylesheet" type="text/css" href="public/style.css">
-</head>
-<body>
+<%- include('./partials/header.ejs') %>
 	<a href="/art/">Back to products</a>
 	<h1><%=art.name%></h1>
 	<div>
@@ -25,5 +18,5 @@
 	<form action="/art/<%=art.id%>?_method=DELETE" method="POST">
 		<button>Delete</button>
 	</form>
-</body>
-</html>
+
+	<%- include('./partials/footer.ejs') %>

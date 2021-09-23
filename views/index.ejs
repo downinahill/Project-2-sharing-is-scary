@@ -1,15 +1,7 @@
-  
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Index</title>
-	<link rel="stylesheet" type="text/css" href="public/style.css">
-</head>
-<body>
+<%- include('./partials/header.ejs') %>
 	<h1>Shop</h1>          
     <ul>
-      <% for (let i = 0; i < products.length; i++) { %>
+      <% for (let i = 0; i < art.length; i++) { %>
         <li>
           <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
           <a href="/art/<%=art[i].id%>"> <img src="<%=art[i].img%>"></a>
@@ -18,5 +10,4 @@
         <% } %>
     </ul>
     <a href="/art/new">Create a New Product</a>
-</body>
-</html>
+    <%- include('./partials/footer.ejs') %>
