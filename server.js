@@ -1,9 +1,10 @@
 // imports
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
-require('dotenv').config()
+const multer = require('multer')
 
 const PORT = process.env.PORT
 // Connect to Database
@@ -32,16 +33,18 @@ db.on('error', (error) => {
 })
 
 // middleware
-
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+app.use(multer({dest:__dirname+'/resoucres/'}).any());
+
 
 // controllers
 
-const productsController = require('./controllers/productsController')
-app.use('/products', productsController)
+const artController = require('./controllers/artController')
+app.use('/art', artController)
 
-// lister
+// listen
 
 app.listen(PORT, () => {
 	console.log('listen on port:', PORT);

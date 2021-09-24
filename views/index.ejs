@@ -1,13 +1,23 @@
-<%- include('./partials/header.ejs') %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
 	<h1>Shop</h1>          
     <ul>
       <% for (let i = 0; i < art.length; i++) { %>
         <li>
           <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
-          <a href="/art/<%=art[i].id%>"> <img src="<%=art[i].img%>"></a>
-          <p>Price: $<%=products[i].price%></p>
+          <a href="/art/<%=art[i].id%>/edit"> <img src="<%=art[i].img%>"></a>
+          
         </li>
         <% } %>
     </ul>
     <a href="/art/new">Create a New Product</a>
-    <%- include('./partials/footer.ejs') %>
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" />
+      </form>
+    </body>
+    </html>

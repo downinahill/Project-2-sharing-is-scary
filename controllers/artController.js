@@ -1,6 +1,8 @@
 const express = require('express')
-const Router = express.Router()
-const Art = require('../models/art.js')
+const router = express.Router()
+const Art = require('../models/art')
+
+
 
 // seed route
 router.get('/seed', async (req, res) => {
@@ -13,7 +15,7 @@ router.get('/seed', async (req, res) => {
             price: '$20',
             qty: 'unlimited'
 
-        }, 
+        }
     ]
 })
 
@@ -29,10 +31,10 @@ router.get('/', (req, res) => {
     catch (err) {
         res.send(err.message)
     }
-})
+ })
 
 // new route
-router.get('/', (req, res) => {
+router.get('/new', (req, res) => {
     try{
         res.render('new.ejs')
     }
@@ -82,7 +84,7 @@ router.put('/:id/', (req, res) => {
             if(err) {
                 res.send(err)
             } else {
-                res.redirect('/products/' + req.params.id)
+                res.redirect('/art/' + req.params.id)
             }
         })
     }

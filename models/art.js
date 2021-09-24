@@ -1,21 +1,16 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
 const artSchema = new Schema ({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     description: String,
     img: String,
-    price: {
-        type: Number,
-        min: 0
-    },
-    qty: {
-        type: Number,
-        min: 0
-    }
+    comment: String
 })
 
-module.exports= mongoose.model('Art', artSchema)
+const Art = model('Art', artSchema)
+
+module.exports = Art
