@@ -33,10 +33,12 @@ db.on('error', (error) => {
 })
 
 // middleware
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
-app.use(multer({dest:__dirname+'/resoucres/'}).any());
+app.use(multer({dest:__dirname+'/resources/'}).any());
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 
 // controllers

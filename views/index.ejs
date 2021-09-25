@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
+    <script language="javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
   </head>
   <body>
-	<h1>Shop</h1>          
+	<h1>Gallery</h1>          
     <ul>
       <% for (let i = 0; i < art.length; i++) { %>
         <li>
@@ -15,9 +18,7 @@
         </li>
         <% } %>
     </ul>
-    <a href="/art/new">Create a New Product</a>
-    <form action="/profile" method="post" enctype="multipart/form-data">
-        <input type="file" name="avatar" />
-      </form>
+    <a href="/art/new">Upload a New Piece</a>
+  
     </body>
     </html>

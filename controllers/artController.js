@@ -6,18 +6,29 @@ const Art = require('../models/art')
 
 // seed route
 router.get('/seed', async (req, res) => {
-    const newArt =
-    [
+    Art.create([
         {
             name: 'A Day in the Life (prints)',
             description: 'A day in the life of an addict living in the DC area',
-            img: '/Users/brianhill/Desktop/Art Website/Images/495.jpeg',
-            price: '$20',
-            qty: 'unlimited'
+            img: 'public/Images/495.jpeg',
+            comment: '',
 
+        },
+        {
+            name: 'Jerry Garcia Portrait',
+            description: 'Colored pencil portrait of Jerry Garcia',
+            img: 'public/Images/jerry garcia 1.jpeg',
+            comment: ''
+        },
+
+    ], (err, data) => {
+        if (err) {
+            console.log(err)
         }
-    ]
+        res.redirect('/art')
+    })
 })
+
 
 //index route
 router.get('/', (req, res) => {
@@ -93,6 +104,38 @@ router.put('/:id/', (req, res) => {
     }
 })
 
+
+
+//post route
+
+router.post('/', (req,res)=>{
+    Art.create(req.body, (error, createdArt) => {
+        if (error){
+            console.log(error)
+            res.send(error)
+        } else {
+            res.redirect('/art')
+        }
+    })
+})
+
+//delete route
+
+router.delete('/:id', (req, res) => {
+	try{
+		Art.findByIdAndDelete(req.params.id, (err, deletedArt) => {
+			if (err){
+				console.log(err)
+				res.send(err)
+			} else {
+			res.redirect('/art')
+			}
+		})
+	}
+	catch (err) {
+		res.send(err.message)
+	}
+})
 
 
 module.exports = router
