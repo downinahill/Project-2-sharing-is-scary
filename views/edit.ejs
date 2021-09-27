@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Edit</title>
-	<!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
-	<script language="javascript" src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-  </head>
-  <body>
-	<h1>Edit</h1>
+<%- include('./partials/header.ejs') %>
+<head>
+	<link rel="stylesheet" type="text/css" href="../../css/style.css">
+</head>
+    <h1>Edit</h1>
 	<form action="/art/<%=art.id%>?_method=PUT" method="POST">
 		<label for="name">Name:
 			<input type="text" name="name" value="<%=art.name%>">
@@ -19,13 +13,9 @@
 		<label for="img">Image:
 			<input type="text" name="img" value="<%=art.img%>">
 		</label><br>
-		<label for="price">Price:
+		<label for="comment">Comment:
 			<input type="number" name="price" required="true" value="<%=art.price%>">
-		</label><br>
-		<label for="qty">Quantity:
-			<input type="number" name="qty" required="true" value="<%=art.qty%>">
 		</label><br>
 		<button type="submit">Update Product</button>
 	</form>
-</body>
-</html>
+<%- include('./partials/footer.ejs') %>

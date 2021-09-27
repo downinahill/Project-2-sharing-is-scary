@@ -1,24 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
-    <script language="javascript" src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-  </head>
+<%- include('./partials/header.ejs') %>
+</html>
   <body>
-	<h1>Gallery</h1>          
+	<h1 class=text-class>Gallery</h1>          
     <ul>
       <% for (let i = 0; i < art.length; i++) { %>
         <li>
           <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
+          
+          
           <a href="/art/<%=art[i].id%>/edit"> <img src="<%=art[i].img%>"></a>
           
         </li>
         <% } %>
     </ul>
     <a href="/art/new">Upload a New Piece</a>
-  
-    </body>
-    </html>
+  <br/>
+<%- include('./partials/footer.ejs') %>

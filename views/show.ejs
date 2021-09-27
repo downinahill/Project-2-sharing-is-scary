@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Show Page</title>
-	<!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
-	
-	<script language="javascript" src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-  </head>
-  <body>
+
+<%- include('./partials/header.ejs') %>
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+  
 	<a href="/art/">Back to products</a>
 	<h1><%=art.name%></h1>
 	<div>
@@ -22,6 +17,13 @@
 			<form action="/art/<%=art.id%>/bought?_method=PUT" method="POST">
 				<button type="submit">BUY</button>
 			</form>
+			<h5>Comments</h5>
+			<textarea>
+
+			</textarea>
+			<form action="/art/<%=art.id%>?_method=PUT" method="POST">
+				<button type="submit">Submit</button>
+			</form>
 		<%}%>
 		<a href="/art/<%=art.id%>/edit">Edit this product</a>
 	</div>
@@ -29,5 +31,4 @@
 		<button>Delete</button>
 	</form>
 
-</body>
-</html>
+    <%- include('./partials/footer.ejs') %>

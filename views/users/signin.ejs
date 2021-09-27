@@ -1,0 +1,18 @@
+<%- include('./partials/header.ejs') %>
+
+
+<h1>Sign In</h1>
+<form action="/users/signin" method="POST">
+    <fieldset>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="usename">
+    </fieldset>
+    <fieldset>
+        <label for="password">Password:</label> 
+        <input name="password" name="password" id="password"></label>
+    </fieldset>
+
+    <input type="submit" value="Sign In">
+</form>
+
+<%- include('./partials/footer.ejs') %>

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Art = require('../models/art')
+const Art = require('../models/art.js')
 
 
 
@@ -18,8 +18,14 @@ router.get('/seed', async (req, res) => {
             name: 'Jerry Garcia Portrait',
             description: 'Colored pencil portrait of Jerry Garcia',
             img: 'public/Images/jerry garcia 1.jpeg',
-            comment: ''
+            comment: '',
         },
+        {
+            name: 'Metro Mayhem',
+            description: 'Collage/mural  of a day in the life',
+            img: 'public/Images/choose life 2.JPG',
+            comment: '',
+        }
 
     ], (err, data) => {
         if (err) {
@@ -118,6 +124,11 @@ router.post('/', (req,res)=>{
         }
     })
 })
+
+
+
+
+
 
 //delete route
 
