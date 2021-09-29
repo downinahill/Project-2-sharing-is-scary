@@ -8,7 +8,7 @@ const multer = require('multer')
 const ejsLint = require('ejs-lint');
 // let upload = multer({ dest: './public/data/uploads/Images' })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 // Connect to Database
 
 const MONGODB_URI = process.env.MONGODB_URI
