@@ -1,26 +1,25 @@
 <%- include('./partials/header.ejs') %>
-<head>
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
-</head>
+
  
-    <h1>New Product Page</h1>
+    <h1>New Artwork</h1>
 
     
 
-    <form action="/stats" enctype="multipart/form-data" method="post">
+    <form action="/art" enctype="multipart/form-data" method="post">
       <div class="form-group">
         <input type="file" class="form-control-file" name="uploaded_file">
-        <input type="text" class="form-control" placeholder="Art to share" name="nspeakers">
-        <input type="submit" value="Show me what you got!" class="btn btn-default">            
+  
       </div>
     </form>
 
-  <br/>
-    <form action="/art" method="POST">
+
+      <form action="/art" method="POST">
       Name: <input type="text" name="name" /> <br/>
       Description:  <input type="text" name="description" /> <br/>
-      
+        <input type="submit" value="Post Artwork"/>
+      </form>     
+   
 
-      <input type="submit" value="Create Product" />
-    </form>
+      
+    
     <%- include('./partials/footer.ejs') %>

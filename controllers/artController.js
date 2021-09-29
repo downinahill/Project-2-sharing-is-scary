@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const Art = require('../models/art.js')
+const multer  = require('multer')
+const upload = multer({ dest: './public/data/uploads/' })
 
 
 
@@ -10,20 +12,20 @@ router.get('/seed', async (req, res) => {
         {
             name: 'A Day in the Life (prints)',
             description: 'A day in the life of an addict living in the DC area',
-            img: 'public/Images/495.jpeg',
+            img: 'project-2/public/Images/495.jpeg',
             comment: '',
 
         },
         {
             name: 'Jerry Garcia Portrait',
             description: 'Colored pencil portrait of Jerry Garcia',
-            img: 'public/Images/jerry garcia 1.jpeg',
+            img: '/public/Images/jerry garcia 1.jpeg',
             comment: '',
         },
         {
             name: 'Metro Mayhem',
-            description: 'Collage/mural  of a day in the life',
-            img: 'public/Images/choose life 2.JPG',
+            description: 'Collage/mural of a day in the life',
+            img: '/public/Images/choose life 2.JPG',
             comment: '',
         }
 
@@ -64,8 +66,10 @@ router.get('/new', (req, res) => {
 router.get('/:id', (req, res) => {
     try{
         Art.findById(req.params.id, (err, foundArt) => {
+            console.log(foundArt)
             res.render('show.ejs', {
                 art: foundArt
+
             })
         })
 
@@ -124,8 +128,6 @@ router.post('/', (req,res)=>{
         }
     })
 })
-
-
 
 
 

@@ -6,7 +6,7 @@ const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const multer = require('multer')
 const ejsLint = require('ejs-lint');
-const upload = multer({ dest: './public/data/uploads/Images' })
+// let upload = multer({ dest: './public/data/uploads/Images' })
 
 const PORT = process.env.PORT
 // Connect to Database
@@ -35,12 +35,12 @@ db.on('error', (error) => {
 })
 
 // middleware
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
-app.use(multer({dest:__dirname+'/Images/'}).any());
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
+// app.use(multer({dest:__dirname+'/Images/'}).any());
+// app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 
 // controllers
@@ -50,23 +50,93 @@ app.use('/art', artController)
 
 
 
-let storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-	  cb(null, __dirname+'/public/uploads')
-	},
-	filename: function (req, file, cb) {
-	  cb(null, Date.now()+file.originalname)
-	}
-  });
+ 
   
-  app.post('/add/details', upload.any(), function(req,res){
-	 var data = req.body;
-	 // path of uploaded file.
-	 data.propic = '/public/uploads/Images'+req.files[0].filename;
-	 res.render('index',{
-		"data": data
-	 });
-  });
+// Set storage engine
+const storage = multer.diskStorage({
+    destination: './public/uploads',
+    filename: function (req, file, cb) {        
+        // null as first argument means no error
+        cb(null, Date.now() + '-' + file.originalname )
+    }
+})
+
+// Init upload
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1000000
+    },
+
+    fileFilter: function (req, file, cb) {
+        sanitizeFile(file, cb);
+    }
+
+}).single('files')
+
+
+
+// Set view engine
+app.set('view engine', 'ejs')
+
+
+
+
+
+
+
+// Set the initial route
+app.get('/', (req, res) => {
+    res.render('index');
+})
+
+
+// Handle the upload route
+app.post('/upload', (req, res) => {
+    // res.send('done');
+    upload(req, res, (err) => {
+        if (err){ 
+            res.render('index', { msg: err})
+        }else{
+            // If file is not selected
+            if (req.file == undefined) {
+                res.render('index', { msg: 'No file selected!' })
+
+            }
+            else{
+                res.render('index', { 
+                  msg: 'File uploaded successfully!', 
+                  file: `uploads/${req.file.filename}` 
+
+
+
+             });
+            }
+
+        }
+
+    })
+})
+
+function sanitizeFile(file, cb) {
+    // Define the allowed extension
+    let fileExts = ['png', 'jpg', 'jpeg', 'gif']
+
+    // Check allowed extensions
+    let isAllowedExt = fileExts.includes(file.originalname.split('.')[1].toLowerCase());
+    // Mime type must be an image
+    let isAllowedMimeType = file.mimetype.startsWith("image/")
+
+    if (isAllowedExt && isAllowedMimeType) {
+        return cb(null, true) // no errors
+    }
+    else {
+        // pass error msg to callback, which can be displaye in frontend
+        cb('Error: File type not allowed!')
+    }
+}
+
+   
 
 
 
