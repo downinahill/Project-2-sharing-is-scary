@@ -54,7 +54,10 @@ app.use('/art', artController)
   
 // Set storage engine
 const storage = multer.diskStorage({
-    destination: './public/uploads',
+    destination: function (req, file, cb) {        
+        // null as first argument means no error
+        cb(null, "./public/uploads/" )
+    },
     filename: function (req, file, cb) {        
         // null as first argument means no error
         cb(null, Date.now() + '-' + file.originalname )
@@ -62,19 +65,22 @@ const storage = multer.diskStorage({
 })
 
 // Init upload
+// const upload = multer({
+//     storage: storage, 
+//     limits: {
+//         fileSize: 100000000
+//     },
+
+//     fileFilter: function (req, file, cb) {
+//         sanitizeFile(file, cb);
+//     }
+
+// })
+
 const upload = multer({
-    storage: storage, 
-    limits: {
-        fileSize: 1000000
-    },
 
-    fileFilter: function (req, file, cb) {
-        sanitizeFile(file, cb);
-    }
-
-}).single('files')
-
-
+	storage: storage
+})
 
 // Set view engine
 app.set('view engine', 'ejs')
@@ -92,30 +98,35 @@ app.get('/', (req, res) => {
 
 
 // Handle the upload route
-app.post('/upload', (req, res) => {
+app.post('/uploads', upload.single("uploaded_file"), (req, res) => {
+	console.log(req.file, req.body)
     // res.send('done');
-    upload(req, res, (err) => {
-        if (err){ 
-            res.render('index', { msg: err})
-        }else{
-            // If file is not selected
-            if (req.file == undefined) {
-                res.render('index', { msg: 'No file selected!' })
+    // upload(req, res, (err) => {
+    //     if (err){ 
+	// 		console.log(err)
+    //         // res.render('index', { msg: err})
+	// 		res.redirect("/art")
 
-            }
-            else{
-                res.render('index', { 
-                  msg: 'File uploaded successfully!', 
-                  file: `uploads/${req.file.filename}` 
+    //     }else{
+    //         // If file is not selected
+    //         if (req.file == undefined) {
+	// 			console.log("errb")
+    //             res.render('index', { msg: 'No file selected!' })
+
+    //         }
+    //         else{ console.log("errc")
+    //             res.render('index', { 
+    //               msg: 'File uploaded successfully!', 
+    //               file: `uploads/${req.file.filename}` 
 
 
 
-             });
-            }
+    //          });
+    //         }
 
-        }
+    //     }
 
-    })
+    // })
 })
 
 function sanitizeFile(file, cb) {
@@ -136,7 +147,8 @@ function sanitizeFile(file, cb) {
     }
 }
 
-   
+
+
 
 
 

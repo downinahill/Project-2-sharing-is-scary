@@ -24,15 +24,16 @@
 
 	<h1>Gallery</h1>          
     <ul>
-      <% for (let i = 0; i < art.length; i++) { %>
+      <!-- <% for (let i = 0; i < art.length; i++) { %> -->
         <li>
+     
           <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
           
           
           <a href="/art/<%=art[i].id%>/edit"> <img src="<%=art[i].img%>"></a>
           
         </li>
-        <% } %>
+        <!-- <% } %> -->
     </ul>
     <a href ="/art/new" class="new">Upload a New Piece</a>
   <br/>

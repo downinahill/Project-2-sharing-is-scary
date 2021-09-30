@@ -2,7 +2,26 @@ const express = require('express')
 const router = express.Router()
 const Art = require('../models/art.js')
 const multer  = require('multer')
-const upload = multer({ dest: './public/data/uploads/' })
+// const upload = multer({ dest: './public/data/uploads/' })
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {        
+        // null as first argument means no error
+        cb(null, "./public/uploads/" )
+    },
+    filename: function (req, file, cb) {        
+        // null as first argument means no error
+        cb(null, Date.now() + '-' + file.originalname )
+    }
+})
+const upload = multer({
+
+	storage: storage
+})
+
+
+
+
 
 
 
@@ -10,22 +29,40 @@ const upload = multer({ dest: './public/data/uploads/' })
 router.get('/seed', async (req, res) => {
     Art.create([
         {
-            name: 'A Day in the Life (prints)',
+            name: 'A Day in the Life',
             description: 'A day in the life of an addict living in the DC area',
-            img: 'project-2/public/Images/495.jpeg',
+            img: '../Images/495.jpg',
             comment: '',
 
         },
         {
             name: 'Jerry Garcia Portrait',
             description: 'Colored pencil portrait of Jerry Garcia',
-            img: '/public/Images/jerry garcia 1.jpeg',
+            img: '../Images/jerry garcia 1.jpg',
             comment: '',
         },
         {
             name: 'Metro Mayhem',
-            description: 'Collage/mural of a day in the life',
-            img: '/public/Images/choose life 2.JPG',
+            description: 'Collage/mural of the DMV/Nova scene',
+            img: '../Images/choose life 2.jpg',
+            comment: '',
+        },
+        {
+            name: 'Cris Cornell',
+            description: 'Pencil Portrait of Chris Cornell',
+            img: '../Images/chris cornell.jpg',
+            comment: '',
+        },
+        {
+            name: 'Fallen Angel',
+            description: 'An intense image of an angel disemboweling himself at the the throne of God',
+            img: '../Images/fallenangel.jpg',
+            comment: '',
+        },
+        {
+            name: 'Jerry Garcia',
+            description: 'Pencil portrait of Jerry Garcia',
+            img: '../Images/JerryGarcia.jpg',
             comment: '',
         }
 
@@ -61,6 +98,14 @@ router.get('/new', (req, res) => {
         res.send(err.message)
     }
 })
+
+
+router.get('/destroy', (req, res) => {
+    Art.collection.drop()
+    res.redirect('/art')
+})
+
+
 
 // show route
 router.get('/:id', (req, res) => {
@@ -118,7 +163,9 @@ router.put('/:id/', (req, res) => {
 
 //post route
 
-router.post('/', (req,res)=>{
+router.post('/', upload.single("uploaded_file"), (req,res)=>{
+    req.body.img = "../uploads/" + req.file.filename
+    console.log(req.body)
     Art.create(req.body, (error, createdArt) => {
         if (error){
             console.log(error)
