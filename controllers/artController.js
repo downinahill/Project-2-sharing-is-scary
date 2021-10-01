@@ -29,42 +29,47 @@ const upload = multer({
 router.get('/seed', async (req, res) => {
     Art.create([
         {
-            name: 'A Day in the Life',
-            description: 'A day in the life of an addict living in the DC area',
-            img: '../Images/495.jpg',
-            comment: '',
+            name: 'Life is but a Dream',
+            description: 'A psychedelic poster done in pencil',
+            img: '../Images/lifeisbutadream.jpg',
+            
 
         },
         {
             name: 'Jerry Garcia Portrait',
             description: 'Colored pencil portrait of Jerry Garcia',
             img: '../Images/jerry garcia 1.jpg',
-            comment: '',
+            
         },
         {
-            name: 'Metro Mayhem',
-            description: 'Collage/mural of the DMV/Nova scene',
-            img: '../Images/choose life 2.jpg',
-            comment: '',
+            name: 'Kurt Cobain',
+            description: 'Pencil portrait of Kurt Cobain',
+            img: '../Images/kurtcobain.jpg',
+            
         },
         {
             name: 'Cris Cornell',
             description: 'Pencil Portrait of Chris Cornell',
             img: '../Images/chris cornell.jpg',
-            comment: '',
+            
         },
         {
-            name: 'Fallen Angel',
-            description: 'An intense image of an angel disemboweling himself at the the throne of God',
-            img: '../Images/fallenangel.jpg',
-            comment: '',
+            name: 'Pennywise',
+            description: 'A pencil portrait of the Stephen King villian, Pennywise, in his story It',
+            img: '../Images/pennywise.jpg',
+            
         },
         {
             name: 'Jerry Garcia',
             description: 'Pencil portrait of Jerry Garcia',
             img: '../Images/JerryGarcia.jpg',
-            comment: '',
-        }
+            
+        },
+        {
+            name: 'Terrapin Station',
+            description: 'Colored pencil drawing of the Grateful Dead turtles dancing at a train station',
+            img: '../Images/terrapin station.jpg',
+        },
 
     ], (err, data) => {
         if (err) {

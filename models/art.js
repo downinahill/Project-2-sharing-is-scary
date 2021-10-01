@@ -8,7 +8,7 @@ const artSchema = new Schema ({
     },
     description: String,
     img: String,
-    comment: String
+    
 })
 
 const Art = model('Art', artSchema)
