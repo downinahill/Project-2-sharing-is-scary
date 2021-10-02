@@ -82,8 +82,8 @@ const upload = multer({
 	storage: storage
 })
 
-// // Set view engine
-// app.set('view engine', 'ejs')
+// Set view engine
+app.set('view engine', 'ejs')
 
 
 
