@@ -1,7 +1,7 @@
 <%- include('./partials/header.ejs') %>
 
 
-<h1 id="sharing">Sharing is Scary</h1>
+<h1 id="sharing">Sharing is Scary!!</h1>
 <section>
     <div class="container">
       <div class="background-img">
@@ -24,16 +24,18 @@
 
 	<h1>Gallery</h1>          
     <ul>
-      <!-- <% for (let i = 0; i < art.length; i++) { %> -->
-        <li>
-     
-          <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
-          
-          
-          <a href="/art/<%=art[i].id%>/edit"> <img src="<%=art[i].img%>"></a>
-          
-        </li>
-        <!-- <% } %> -->
+<%if(art){%>
+        <% for (let i = 0; i < art.length; i++) { %>
+            <li>
+        
+            <a href="/art/<%=art[i].id%>"> <h2><%=art[i].name%></h2></a>
+            
+            
+            <a href="/art/<%=art[i].id%>/edit"> <img src="<%=art[i].img%>"></a>
+            
+            </li>
+            <% } %>
+<%}%>
     </ul>
     <a href ="/art/new" class="new">Upload a New Piece</a>
   <br/>
