@@ -50,8 +50,8 @@ app.use('/art', artController)
 
 
 
- 
-  
+
+
 // Set storage engine
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {        
